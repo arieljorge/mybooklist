@@ -15,15 +15,17 @@ public class Book {
     private String author;
     private String genres;
     private String imgUrl;
+    @Column(columnDefinition = "TEXT")
     private String shortDescription;
+    @Column(columnDefinition = "TEXT")
     private String longDescription;
-    private int status;
-    private int releaseYear;
+    private Integer status; // 0-complete; 1-ongoing; 2-hiato; 3-canceled;
+    private Integer releaseYear;
+    private Double score;
 
     /*
-                ^
-    can name a variable here, but you can change for the BD,
-    using the annotation @Column(name = "name here").
+    you can name a variable here, but if the name conflicts with the DB keys,
+    just use the annotation @Column(name = "name here") to change in te mapping.
 
     There is something interesting, the JPA Spring apparently would change the
     camelCase to snake_case. Nice.
@@ -31,7 +33,7 @@ public class Book {
 
     public Book() {}
 
-    public Book(long id, String title, String author, String genres, String imgUrl, String shortDescription, String longDescription, int status, int releaseYear) {
+    public Book(long id, String title, String author, String genres, String imgUrl, String shortDescription, String longDescription, int status, int releaseYear, double score) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -41,6 +43,7 @@ public class Book {
         this.longDescription = longDescription;
         this.status = status;
         this.releaseYear = releaseYear;
+        this.score = score;
     }
 
     public long getId() {
@@ -115,11 +118,19 @@ public class Book {
         this.releaseYear = releaseYear;
     }
 
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || this.getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return this.id == book.id;
+        return Objects.equals(this.id, book.id);
     }
 
     @Override
