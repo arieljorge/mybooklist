@@ -1,6 +1,7 @@
 package com.elria.mybooklist.dto;
 
 import com.elria.mybooklist.entities.Book;
+import com.elria.mybooklist.projections.BookMinProjection;
 
 public class BookMinDTO {
 
@@ -20,6 +21,15 @@ public class BookMinDTO {
         this.imgUrl = entity.getImgUrl();
         this.shortDescription = entity.getShortDescription();
         this.score = entity.getScore();
+    }
+
+    public BookMinDTO(BookMinProjection projection) {
+        this.id = projection.getId();
+        this.title = projection.getTitle();
+        this.genres = projection.getGenres();
+        this.imgUrl = projection.getImgUrl();
+        this.shortDescription = projection.getShortDescription();
+        this.score = projection.getScore();
     }
 
     public Long getId() {
