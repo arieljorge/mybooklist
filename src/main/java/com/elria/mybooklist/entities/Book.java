@@ -15,10 +15,13 @@ public class Book {
     private String author;
     private String genres;
     private String imgUrl;
+
     @Column(columnDefinition = "TEXT")
     private String shortDescription;
+
     @Column(columnDefinition = "TEXT")
     private String longDescription;
+
     private Integer status; // 0-complete; 1-ongoing; 2-hiato; 3-canceled;
     private Integer releaseYear;
     private Double score;
