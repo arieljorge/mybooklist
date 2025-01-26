@@ -32,6 +32,12 @@ public class BookService {
     }
 
     @Transactional(readOnly = true)
+    public List<BookMinDTO> findByTitle(String title) {
+        List<BookMinProjection> bookMap = bookRepository.searchByTitle(title);
+        return bookMap.stream().map(BookMinDTO::new).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public List<BookMinDTO> findByList(Long listId) {
         List<BookMinProjection> bookMap = bookRepository.searchByList(listId);
         return bookMap.stream().map(BookMinDTO::new).collect(Collectors.toList());

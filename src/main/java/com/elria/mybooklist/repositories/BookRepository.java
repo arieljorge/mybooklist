@@ -21,4 +21,16 @@ public interface BookRepository extends JpaRepository<Book, Long> {
         WHERE TB_BELONGING.LIST_ID = :listId ORDER BY TB_BELONGING.POSITION
     """)
     List<BookMinProjection> searchByList(Long listId);
+
+    @Query(nativeQuery = true, value = """
+        SELECT  ID,
+                TITLE,
+                IMG_URL AS imgUrl,
+                SHORT_DESCRIPTION AS shortDescription,
+                GENRES,
+                SCORE
+        FROM TB_BOOK
+        WHERE TITLE ILIKE %:title%
+    """)
+    List<BookMinProjection> searchByTitle(String title);
 }
